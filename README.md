@@ -1,0 +1,3 @@
+# chat-dev
+
+Criado para desenvolvedores conversarem, agrupando por assuntos, criando salas, chamando amigos, etc...
