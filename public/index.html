@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="chatDev">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Dev</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-7">
+        <h1>Chat Developers</h1>
+        <p>chat para desenvolvedores</p>
+        <div class="list-group" ng-controller="chat">
+          <a href="#" class="list-group-item" ng-repeat="message in messages">
+            <h4 class="list-group-item-heading">{{message.user}}</h4>
+            <p class="list-group-item-text">{{message.message}}</p>
+          </a>
+        </div>
+      </div>
+      <div class="col-xs-5">
+        <div ng-controller="createChat" class="jumbotron">
+          <h2>Crie seu chat ou acesse os chats publicos!</h2>
+          <div class="form-group">
+            <label for="subject">Assunto</label>
+            <input type="text" ng-model="message.user" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="name">Seu Nome</label>
+            <input type="text" ng-model="message.message" class="form-control"/>
+          </div>
+          <button class="btn btn-block btn-lg btn-primary" ng-click="create(message)">Criar Chat</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="http://localhost:5430/socket.io/socket.io.js"></script>
+  <script src="bower_components/angularjs/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/ng-socket-io/ng-socket-io.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
