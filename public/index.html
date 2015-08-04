@@ -5,34 +5,47 @@
   <title>Chat Dev</title>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
 </head>
-<body>
+<body ng-controller="ChatCtrl">
   <div class="container">
-    <div class="row">
-      <div class="col-xs-7">
-        <h1>Chat Developers</h1>
-        <p>chat para desenvolvedores</p>
-        <div class="list-group" ng-controller="chat">
+    <div class="row" ng-hide="users.length > 0">
+      <div class="col-xs-5">
+        <div class="jumbotron">
+          <h2>Crie seu chat ou acesse os chats publicos!</h2>
+          <div class="form-group">
+            <label for="subject">Assunto</label>
+            <input type="text" ng-model="chat.subject" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="name">Seu Nome</label>
+            <input type="text" ng-model="user.name" class="form-control"/>
+          </div>
+          <button class="btn btn-block btn-lg btn-primary" ng-click="create(user, chat)">Criar Chat</button>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-show="users.length > 0">
+      <div class="col-xs-2">
+        <a href="#" id="{{user.id}}" ng-repeat="user in users">{{user.name}}</a>
+      </div>
+      <div class="col-xs-10">
+        <div class="list-group">
           <a href="#" class="list-group-item" ng-repeat="message in messages">
             <h4 class="list-group-item-heading">{{message.user}}</h4>
             <p class="list-group-item-text">{{message.message}}</p>
           </a>
         </div>
       </div>
-      <div class="col-xs-5">
-        <div ng-controller="createChat" class="jumbotron">
-          <h2>Crie seu chat ou acesse os chats publicos!</h2>
-          <div class="form-group">
-            <label for="subject">Assunto</label>
-            <input type="text" ng-model="message.user" class="form-control"/>
-          </div>
-          <div class="form-group">
-            <label for="name">Seu Nome</label>
-            <input type="text" ng-model="message.message" class="form-control"/>
-          </div>
-          <button class="btn btn-block btn-lg btn-primary" ng-click="create(message)">Criar Chat</button>
+      <div class="col-xs-12">
+        <div class="input-group">
+          <input type="hidden" ng-model="user.id" value="{{user.id}}">
+        <input type="text" name="message" ng-keydown="key($event)" ng-model="message" placeholder="Digite sua mensagem aqui" class="form-control" />
+        <div class="input-group-btn">
+          <button class="btn btn-primary" ng-click="enviar(message)">Enviar</button>
+        </div>
         </div>
       </div>
     </div>
+
   </div>
   <script src="http://localhost:5430/socket.io/socket.io.js"></script>
   <script src="bower_components/angularjs/angular.min.js"></script>
